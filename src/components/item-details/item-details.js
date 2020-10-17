@@ -1,12 +1,22 @@
 import React, { Component } from 'react';
-import SwapiService from '../../services/swapi-service';
 import Spinner from '../spinner';
 
 import './item-details.css';
 
-export default class ItemDetails extends Component {
+const Record = ({ item, field, label }) => {
+    return (
+      <li className="list-group-item">
+        <span className="term">{label}</span>
+        <span>{ item[field] }</span>
+      </li>
+    );
+  };
+  
+export {
+    Record
+};
 
-    swapiService = new SwapiService();
+export default class ItemDetails extends Component {
 
     state = {
         item: null,
@@ -47,7 +57,7 @@ export default class ItemDetails extends Component {
         if (!item){
             return <span>Select a item from a list</span>;
         }
-        const { id, gender, birthYear, eyeColor, name } = item;
+        const { name } = item;
 
         if (this.state.loading) {
             return <Spinner />;
@@ -58,20 +68,13 @@ export default class ItemDetails extends Component {
                 src={image} />
 
                 <div className="card-body">
-                <h4>{name} [{this.props.itemId}]</h4>
+                <h4>{name}</h4>
                 <ul className="list-group list-group-flush">
-                    <li className="list-group-item">
-                    <span className="term">Gender</span>
-                    <span>{gender}</span>
-                    </li>
-                    <li className="list-group-item">
-                    <span className="term">Birth Year</span>
-                    <span>{birthYear}</span>
-                    </li>
-                    <li className="list-group-item">
-                    <span className="term">Eye Color</span>
-                    <span>{eyeColor}</span>
-                    </li>
+                    {
+                        React.Children.map(this.props.children, (child) => {
+                            return React.cloneElement(child, { item });
+                        })
+                    }
                 </ul>
                 </div>
             </div>
