@@ -3,7 +3,10 @@ import { Link } from 'react-router-dom';
 
 import './header.css';
 
-const Header = () => {
+const Header = ({ isLoggedIn }) => {
+    
+    const lgn = isLoggedIn ? <span>logged in</span> : <Link to="/secret">Secret page</Link>;
+
     return (
         <div className="header d-flex">
         <h3>
@@ -18,6 +21,12 @@ const Header = () => {
             </li>
             <li>
                 <Link to="/starships/">Starships</Link>
+            </li>
+            <li>
+                {lgn}
+            </li>
+            <li>
+                <Link to="/login">Login</Link>
             </li>
         </ul>
         </div>
