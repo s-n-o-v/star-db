@@ -47,7 +47,7 @@ export default class App extends Component {
                             <RandomPlanet/>
 
                             <Switch>
-                                <Route path="/" exact render={() => <h2>Website wa hacked by Wet Willy!</h2>} />
+                                <Route path="/" exact render={() => <h2>Website was hacked by Wet Willy!</h2>} />
 
                                 <Route path="/people/:id?" component={PeoplePage} />
                                 <Route path="/planets" component={PlanetsPage} />
